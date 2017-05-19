@@ -22,11 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        colorChagneTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(rotateBGColor), userInfo: nil, repeats: true)
-        colorChagneTimer.invalidate()
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,19 +31,19 @@ class ViewController: UIViewController {
     
     
     @IBAction func onChangeBGColor(_ sender: Any) {
-        if colorChagneTimer.isValid == true {
-            colorChagneTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(rotateBGColor), userInfo: nil, repeats: true)
+        if colorChagneTimer.isValid == false {
+            colorChagneTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(rotateBGColor), userInfo: nil, repeats: true)
         } else {
             colorChagneTimer.invalidate()
         }
-
+        
     }
     
     
     func rotateBGColor () {
         // Change background color automatically!
         
-        self.view.backgroundColor = BGColorList[colorCounter]
+        self.view.backgroundColor = BGColorList[colorCounter].withAlphaComponent(0.75)
         
         colorCounter = colorCounter + 1
         
@@ -57,6 +54,6 @@ class ViewController: UIViewController {
     }
     
     
-
+    
 }
 
