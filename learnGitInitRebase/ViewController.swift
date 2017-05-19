@@ -14,12 +14,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var showQuestionBtn: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
     var colorCounter = 0
+    var colorChagneTimer = Timer()
     
-    let BGColorList = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan, UIColor.magenta, UIColor.yellow, UIColor.black, UIColor.clear]
+    
+    let BGColorList = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan, UIColor.magenta, UIColor.yellow, UIColor.black, UIColor.white]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        colorChagneTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(rotateBGColor), userInfo: nil, repeats: true)
+        colorChagneTimer.invalidate()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,8 +34,26 @@ class ViewController: UIViewController {
     
     
     @IBAction func onChangeBGColor(_ sender: Any) {
+        if colorChagneTimer.isValid == true {
+            colorChagneTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(rotateBGColor), userInfo: nil, repeats: true)
+        } else {
+            colorChagneTimer.invalidate()
+        }
+
+    }
+    
+    
+    func rotateBGColor () {
+        // Change background color automatically!
         
-        self.view.backgroundColor = BGColorList[0]
+        self.view.backgroundColor = BGColorList[colorCounter]
+        
+        colorCounter = colorCounter + 1
+        
+        if colorCounter >= BGColorList.count {
+            colorCounter = 0
+        }
+        
     }
     
     
