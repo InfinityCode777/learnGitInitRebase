@@ -12,7 +12,10 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var showQuestionBtn: UIButton!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    var colorCounter = 0
     
+    let BGColorList = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan, UIColor.magenta, UIColor.yellow, UIColor.black, UIColor.clear]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +26,14 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    @IBAction func onChangeBGColor(_ sender: Any) {
+        
+        self.view.backgroundColor = BGColorList[0]
+    }
+    
+    
 
 }
 
